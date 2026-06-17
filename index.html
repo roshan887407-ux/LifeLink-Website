@@ -3,764 +3,1346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy — LifeLink</title>
-    <meta name="description" content="Privacy Policy for LifeLink — Digital Discipline & Growth Android application by Roshan Sharma.">
+    <title>Arise — Digital Discipline & Growth</title>
+    <meta name="description" content="Arise helps you build unbreakable habits, reclaim your screen time, and grow with AI-powered coaching. Your personal discipline OS for Android.">
+    <meta name="keywords" content="arise, habit tracker, digital discipline, screen time, focus, productivity, AI coach, Android app">
+    <meta name="author" content="Roshan Sharma">
+    <meta property="og:title" content="Arise — Digital Discipline & Growth">
+    <meta property="og:description" content="Build unbreakable habits. Reclaim your screen time. Grow with AI-powered coaching.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://roshan887407-ux.github.io/LifeLink-Website/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        /* ═══════════════════════════════════════════════════════════════════
+           ARISE — Premium Landing Page
+           Design System & Variables
+        ═══════════════════════════════════════════════════════════════════ */
         :root {
-            --bg: #0a0a0f;
-            --surface: #111118;
-            --surface-alt: #16161f;
-            --border: #23233a;
-            --text: #e4e4ef;
-            --text-secondary: #8b8ba0;
+            --bg-primary: #050508;
+            --bg-secondary: #0a0a12;
+            --bg-tertiary: #0f0f1a;
+            --surface: #111120;
+            --surface-hover: #16162a;
+            --border: rgba(124, 92, 252, 0.12);
+            --border-strong: rgba(124, 92, 252, 0.25);
+            --text-primary: #f0f0f8;
+            --text-secondary: #8b8ba8;
+            --text-muted: #55556a;
             --accent: #7c5cfc;
-            --accent-soft: rgba(124, 92, 252, 0.12);
-            --warning: #ffb347;
-            --success: #4ade80;
+            --accent-light: #9b82ff;
+            --accent-dark: #5a3cd4;
+            --accent-glow: rgba(124, 92, 252, 0.4);
+            --cyan: #22d3ee;
+            --cyan-glow: rgba(34, 211, 238, 0.3);
+            --green: #4ade80;
+            --orange: #fb923c;
+            --pink: #f472b6;
+            --red: #f87171;
+            --gold: #fbbf24;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --glass-bg: rgba(17, 17, 32, 0.6);
+            --glass-border: rgba(124, 92, 252, 0.15);
+            --glass-blur: 20px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 780px;
-            margin: 0 auto;
-            padding: 40px 24px 80px;
+        /* ═══ Animated Background Mesh ═══════════════════════════════════ */
+        .bg-mesh {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 48px;
-            padding-bottom: 32px;
+        .bg-mesh::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: 
+                radial-gradient(ellipse 600px 400px at 20% 30%, rgba(124, 92, 252, 0.08), transparent),
+                radial-gradient(ellipse 500px 350px at 75% 60%, rgba(34, 211, 238, 0.05), transparent),
+                radial-gradient(ellipse 400px 300px at 50% 80%, rgba(244, 114, 182, 0.04), transparent);
+            animation: meshFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes meshFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -20px) rotate(1deg); }
+            66% { transform: translate(-20px, 15px) rotate(-1deg); }
+        }
+
+        /* ═══ Grid Background ════════════════════════════════════════════ */
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(rgba(124, 92, 252, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124, 92, 252, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 20%, transparent 70%);
+        }
+
+        /* ═══ Scroll Reveal Animation ════════════════════════════════════ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+
+        /* ═══ Navigation ═════════════════════════════════════════════════ */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        nav.scrolled {
+            background: rgba(5, 5, 8, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
+            padding: 10px 0;
         }
 
-        header h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 8px;
-        }
-
-        header .app-name {
-            color: var(--accent);
-        }
-
-        header .last-updated {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        header .effective-date {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-top: 4px;
-        }
-
-        /* Commitment card */
-        .commitment-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 28px;
-            margin-bottom: 40px;
-        }
-
-        .commitment-card h2 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: var(--accent);
-        }
-
-        .commitment-point {
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
             display: flex;
-            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, var(--accent), var(--cyan));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+            color: white;
+        }
+
+        .nav-logo-text {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+            border-radius: 1px;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            background: var(--accent) !important;
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-weight: 600 !important;
+            transition: transform 0.2s, box-shadow 0.3s !important;
+        }
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+        .nav-cta::after { display: none !important; }
+
+        .nav-mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* ═══ Section Shared ═════════════════════════════════════════════ */
+        section { position: relative; z-index: 1; }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border: 1px solid var(--border-strong);
+            background: rgba(124, 92, 252, 0.06);
+            color: var(--accent-light);
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
             margin-bottom: 16px;
         }
 
-        .commitment-point:last-child {
-            margin-bottom: 0;
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.7;
         }
 
-        .commitment-emoji {
-            font-size: 1.3rem;
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-light), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ═══ HERO SECTION ═══════════════════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 800px; height: 800px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .hero-glow-1 {
+            top: -200px; left: -200px;
+            background: radial-gradient(circle, var(--accent), transparent 70%);
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
+
+        .hero-glow-2 {
+            bottom: -300px; right: -200px;
+            background: radial-gradient(circle, var(--cyan), transparent 70%);
+            animation: pulseGlow 8s ease-in-out infinite 4s;
+            opacity: 0.15;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.35; transform: scale(1.1); }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text { position: relative; z-index: 2; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 100px;
+            background: rgba(124, 92, 252, 0.08);
+            border: 1px solid rgba(124, 92, 252, 0.2);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--accent-light);
+            margin-bottom: 28px;
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(124, 92, 252, 0.2); }
+            50% { box-shadow: 0 0 0 8px rgba(124, 92, 252, 0); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 1.08;
+            margin-bottom: 24px;
+        }
+
+        .hero-title .line { display: block; }
+
+        .hero-description {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+            margin-bottom: 40px;
+            max-width: 520px;
+        }
+
+        .hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            text-decoration: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 24px var(--accent-glow);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: transparent;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 1px solid var(--border-strong);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .btn-secondary:hover {
+            background: rgba(124, 92, 252, 0.06);
+            border-color: var(--accent);
+        }
+
+        /* Hero Image */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-phone {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-phone img {
+            width: 320px;
+            height: auto;
+            border-radius: 28px;
+            box-shadow: 
+                0 0 0 1px rgba(124, 92, 252, 0.15),
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 80px rgba(124, 92, 252, 0.15);
+            animation: phoneFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes phoneFloat {
+            0%, 100% { transform: translateY(0) rotate(2deg); }
+            50% { transform: translateY(-16px) rotate(2deg); }
+        }
+
+        .hero-phone-glow {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px; height: 500px;
+            background: radial-gradient(ellipse, var(--accent-glow), transparent 60%);
+            filter: blur(60px);
+            z-index: 1;
+        }
+
+        /* Floating badges around the phone */
+        .float-badge {
+            position: absolute;
+            padding: 10px 16px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .float-badge-1 {
+            top: 15%; left: -20px;
+            animation: floatBadge1 5s ease-in-out infinite;
+        }
+        .float-badge-2 {
+            bottom: 25%; right: -30px;
+            animation: floatBadge2 6s ease-in-out infinite;
+        }
+        .float-badge-3 {
+            top: 60%; left: -40px;
+            animation: floatBadge1 7s ease-in-out infinite 1s;
+        }
+
+        @keyframes floatBadge1 {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-10px) translateX(5px); }
+        }
+        @keyframes floatBadge2 {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-8px) translateX(-5px); }
+        }
+
+        /* ═══ STATS BAR ══════════════════════════════════════════════════ */
+        .stats-bar {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-secondary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .stat-item { text-align: center; }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* ═══ PROBLEM SECTION ════════════════════════════════════════════ */
+        .problem-section {
+            padding: 120px 0;
+        }
+
+        .problem-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .problem-stat {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin: 40px 0 20px;
+        }
+
+        .problem-stat .hours { color: var(--red); }
+
+        .problem-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .problem-highlight {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* ═══ FEATURES SECTION ═══════════════════════════════════════════ */
+        .features-section {
+            padding: 120px 0;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .features-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-strong);
+            background: rgba(17, 17, 32, 0.8);
+        }
+        .feature-card:hover::before { opacity: 1; }
+
+        .feature-icon {
+            width: 52px; height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 18px;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .feature-desc {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ═══ SHOWCASE SECTIONS ══════════════════════════════════════════ */
+        .showcase-section {
+            padding: 120px 0;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .showcase-grid.reversed { direction: rtl; }
+        .showcase-grid.reversed > * { direction: ltr; }
+
+        .showcase-text { max-width: 500px; }
+
+        .showcase-features-list {
+            list-style: none;
+            margin-top: 28px;
+        }
+
+        .showcase-features-list li {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .showcase-features-list li .check {
+            color: var(--green);
+            font-weight: 700;
             flex-shrink: 0;
             margin-top: 2px;
         }
 
-        .commitment-text strong {
-            display: block;
+        .showcase-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .showcase-visual img {
+            width: 300px;
+            border-radius: 24px;
+            box-shadow:
+                0 0 0 1px rgba(124, 92, 252, 0.1),
+                0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .showcase-visual .glow {
+            position: absolute;
+            width: 350px; height: 400px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        /* ═══ DIVIDER ════════════════════════════════════════════════════ */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+            margin: 0 auto;
+            max-width: 600px;
+        }
+
+        /* ═══ TESTIMONIAL / QUOTE ════════════════════════════════════════ */
+        .quote-section {
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .quote-text {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            color: var(--text-primary);
+        }
+
+        .quote-author {
+            color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 2px;
         }
 
-        .commitment-text p {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
+        /* ═══ CTA SECTION ════════════════════════════════════════════════ */
+        .cta-section {
+            padding: 120px 0;
         }
 
-        /* Section styling */
-        section {
-            margin-bottom: 36px;
+        .cta-card {
+            background: linear-gradient(135deg, rgba(124, 92, 252, 0.12), rgba(34, 211, 238, 0.06));
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-xl);
+            padding: 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        h2 {
-            font-size: 1.25rem;
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--cyan), var(--accent));
+        }
+
+        .cta-card .section-subtitle {
+            margin: 0 auto 40px;
+        }
+
+        .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+        /* Play Store badge */
+        .play-store-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            text-decoration: none;
+            border-radius: 14px;
             font-weight: 700;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border);
+            transition: all 0.3s;
+            box-shadow: 0 4px 24px var(--accent-glow);
+        }
+        .play-store-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px var(--accent-glow);
         }
 
-        h3 {
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-top: 18px;
-            margin-bottom: 8px;
-            color: var(--accent);
+        .play-store-badge svg {
+            width: 24px; height: 24px;
+            fill: currentColor;
         }
 
-        p {
-            margin-bottom: 12px;
+        /* ═══ FOOTER ═════════════════════════════════════════════════════ */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 60px 0 40px;
+            background: var(--bg-secondary);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand-desc {
             color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-top: 16px;
+            max-width: 300px;
         }
 
-        ul, ol {
-            margin-bottom: 12px;
-            padding-left: 20px;
+        .footer-heading {
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 20px;
         }
 
-        li {
-            margin-bottom: 8px;
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li { margin-bottom: 10px; }
+
+        .footer-links a {
             color: var(--text-secondary);
-        }
-
-        li strong {
-            color: var(--text);
-        }
-
-        /* Info box */
-        .info-box {
-            background: var(--surface-alt);
-            border-left: 3px solid var(--accent);
-            border-radius: 8px;
-            padding: 16px 20px;
-            margin: 16px 0;
-        }
-
-        .info-box p {
-            margin-bottom: 4px;
+            text-decoration: none;
             font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--text-primary); }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+            color: var(--text-muted);
         }
 
-        .info-box p:last-child {
-            margin-bottom: 0;
-        }
-
-        .warning-box {
-            background: rgba(255, 179, 71, 0.06);
-            border-left: 3px solid var(--warning);
-            border-radius: 8px;
-            padding: 16px 20px;
-            margin: 16px 0;
-        }
-
-        .warning-box p {
-            margin-bottom: 4px;
-            font-size: 0.9rem;
-        }
-
-        /* Table */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 16px 0;
-            font-size: 0.9rem;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        th {
-            background: var(--surface);
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        td {
-            color: var(--text-secondary);
-        }
-
-        a {
-            color: var(--accent);
+        .footer-bottom a {
+            color: var(--text-muted);
             text-decoration: none;
         }
+        .footer-bottom a:hover { color: var(--text-secondary); }
 
-        a:hover {
-            text-decoration: underline;
+        .social-links {
+            display: flex;
+            gap: 16px;
         }
 
-        footer {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid var(--border);
+        .social-link {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+        .social-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(124, 92, 252, 0.06);
         }
 
-        footer p {
-            color: var(--text-secondary);
+        /* ═══ RESPONSIVE ═════════════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-description { margin: 0 auto 40px; }
+            .hero-actions { justify-content: center; }
+            .hero-visual { margin-top: 40px; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .showcase-grid, .showcase-grid.reversed { grid-template-columns: 1fr; text-align: center; direction: ltr; }
+            .showcase-grid.reversed > * { direction: ltr; }
+            .showcase-text { max-width: 100%; margin: 0 auto; }
+            .showcase-visual { margin-top: 40px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 24px 16px 60px;
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-mobile-toggle { display: block; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: rgba(5, 5, 8, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                padding: 24px 32px;
+                border-bottom: 1px solid var(--border);
+                gap: 16px;
             }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .features-grid { grid-template-columns: 1fr; }
+            .hero-phone img { width: 260px; }
+            .cta-card { padding: 48px 24px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+            .float-badge { display: none; }
+        }
 
-            header h1 {
-                font-size: 1.5rem;
-            }
-
-            h2 {
-                font-size: 1.1rem;
-            }
-
-            table {
-                font-size: 0.8rem;
-            }
-
-            th, td {
-                padding: 8px 10px;
-            }
+        @media (max-width: 480px) {
+            .section-container { padding: 0 20px; }
+            .hero { padding: 100px 0 60px; }
+            .hero-actions { flex-direction: column; width: 100%; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Privacy Policy — <span class="app-name">LifeLink</span></h1>
-            <p class="last-updated">Last Updated: June 14, 2026</p>
-            <p class="effective-date">Effective Date: June 14, 2026</p>
-        </header>
 
-        <!-- ═══ Our Commitment ═══════════════════════════════════════════ -->
-        <div class="commitment-card">
-            <h2>🛡️ Our Commitment to You</h2>
+    <!-- Background Effects -->
+    <div class="bg-mesh"></div>
+    <div class="grid-bg"></div>
 
-            <div class="commitment-point">
-                <span class="commitment-emoji">📱</span>
-                <div class="commitment-text">
-                    <strong>Your data stays on your device by default.</strong>
-                    <p>LifeLink works fully offline. Your habits, tasks, journal entries, and focus session data are stored locally on your device. Nothing is uploaded unless you explicitly choose to enable sync.</p>
+    <!-- ═══ NAVIGATION ══════════════════════════════════════════════════ -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon">A</div>
+                <span class="nav-logo-text">Arise</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#protocol">Protocol</a></li>
+                <li><a href="#aria">Aria AI</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#download" class="nav-cta">Download</a></li>
+            </ul>
+            <button class="nav-mobile-toggle" id="menuToggle" aria-label="Menu">☰</button>
+        </div>
+    </nav>
+
+    <!-- ═══ HERO SECTION ════════════════════════════════════════════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+        <div class="section-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge reveal">
+                        <span>🔥</span>
+                        <span>Built for Warriors, Not Scrollers</span>
+                    </div>
+                    <h1 class="hero-title reveal reveal-delay-1">
+                        <span class="line">Stop Scrolling.</span>
+                        <span class="line">Start <span class="gradient-text">Rising.</span></span>
+                    </h1>
+                    <p class="hero-description reveal reveal-delay-2">
+                        Arise is your personal discipline operating system — build unbreakable habits, reclaim your screen time with Protocol, 
+                        and grow with Aria, your AI-powered coach. All on your terms, all with your privacy.
+                    </p>
+                    <div class="hero-actions reveal reveal-delay-3">
+                        <a href="#download" class="btn-primary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            Get Arise Free
+                        </a>
+                        <a href="#features" class="btn-secondary">
+                            Explore Features ↓
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="commitment-point">
-                <span class="commitment-emoji">☁️</span>
-                <div class="commitment-text">
-                    <strong>Cloud sync is strictly opt-in.</strong>
-                    <p>If you sign in, your data syncs to your own private Firebase/Google Drive storage. Only you can access it. We cannot read your personal entries.</p>
-                </div>
-            </div>
-
-            <div class="commitment-point">
-                <span class="commitment-emoji">🚫</span>
-                <div class="commitment-text">
-                    <strong>We do not sell your data. Ever.</strong>
-                    <p>We do not sell, rent, lease, or trade your personal information to any third party for commercial purposes. Not now, not ever.</p>
-                </div>
-            </div>
-
-            <div class="commitment-point">
-                <span class="commitment-emoji">🤖</span>
-                <div class="commitment-text">
-                    <strong>AI that respects your privacy.</strong>
-                    <p>Our AI assistant "Aria" can run entirely on-device. Cloud AI is opt-in. You control what data Aria can access via granular privacy settings.</p>
-                </div>
-            </div>
-
-            <div class="commitment-point">
-                <span class="commitment-emoji">🗑️</span>
-                <div class="commitment-text">
-                    <strong>Full deletion on demand.</strong>
-                    <p>Delete your account and your app data is removed immediately after account verification. No retention games.</p>
+                <div class="hero-visual reveal reveal-delay-2">
+                    <div class="hero-phone-glow"></div>
+                    <div class="hero-phone">
+                        <img src="assets/arise_dashboard.png" alt="Arise App Dashboard" loading="eager">
+                    </div>
+                    <div class="float-badge float-badge-1">
+                        🔥 42-Day Streak
+                    </div>
+                    <div class="float-badge float-badge-2">
+                        ⚡ Level 12 — Warrior
+                    </div>
+                    <div class="float-badge float-badge-3">
+                        🛡️ Protocol Active
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <p>This Privacy Policy describes how Roshan Sharma ("Developer", "we", "us", or "our") collects, uses, discloses, and protects information when you use the LifeLink mobile application ("App", "Service") available on the Google Play Store. By using the App, you agree to the collection and use of information in accordance with this policy.</p>
-
-        <!-- ═══ 1. Information We Collect ═════════════════════════════════ -->
-        <section>
-            <h2>1. Information We Collect</h2>
-
-            <h3>1.1 Information You Provide Directly</h3>
-            <ul>
-                <li><strong>Account Information:</strong> When you create an account, we collect your email address, username, and password. Passwords are handled exclusively by Firebase Authentication — we never see, store, or have access to your raw password.</li>
-                <li><strong>Profile Information:</strong> Display name and profile picture, only if you choose to add or update them.</li>
-                <li><strong>User-Generated Content:</strong> Tasks, habits, journal entries, notes, projects, areas, resources, and focus session settings. This content is stored locally on your device by default and synced to the cloud only if you opt in.</li>
-                <li><strong>AI Chat Conversations:</strong> Messages you send to our AI assistant "Aria" are stored locally on your device. If you enable Cloud AI mode, your messages are sent to a third-party AI service for processing (see Section 5).</li>
-                <li><strong>Survey Responses:</strong> If you complete the optional in-app onboarding survey, your responses (e.g., age, life expectancy estimate, personal goals) are stored locally on your device and used solely to personalize your experience.</li>
-            </ul>
-
-            <h3>1.2 Information Collected Automatically</h3>
-            <ul>
-                <li><strong>Analytics Data:</strong> We use Firebase Analytics (Google) to collect anonymized, aggregated usage statistics such as screen views, feature usage frequency, session duration, and in-app events. This data is not linked to your personal identity and is used solely to understand how features are used and to improve the App.</li>
-                <li><strong>Crash and Performance Data:</strong> We collect anonymized crash reports and performance metrics through Firebase to diagnose and fix technical issues. This includes device type, operating system version, app version, and stack traces. This data is not linked to your personal identity.</li>
-                <li><strong>Advertising Data:</strong> We use Google AdMob to display non-personalized banner advertisements within the App. AdMob may collect device advertising identifiers and limited device information as described in Google's privacy policy. You can opt out of personalized advertising in your device's Google Settings. Ads are displayed based on in-app gamification health — users in good standing see fewer or no ads.</li>
-            </ul>
-
-            <h3>1.3 Information Accessed On-Device Only (Never Collected)</h3>
-            <div class="info-box">
-                <p>The following data is accessed and processed entirely on your device. It is <strong>never transmitted, uploaded, or accessible</strong> to us or any third party:</p>
+    <!-- ═══ STATS BAR ═══════════════════════════════════════════════════ -->
+    <div class="stats-bar">
+        <div class="section-container">
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-target="7">7+</div>
+                    <div class="stat-label">Core Features</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-1">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Privacy-First</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-2">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Data Sold</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-3">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Growth Potential</div>
+                </div>
             </div>
-            <ul>
-                <li><strong>App Usage Statistics:</strong> If you grant the Usage Access permission, LifeLink reads your screen time data to display your own usage patterns within the App. This data stays exclusively on your device.</li>
-                <li><strong>Foreground App Detection:</strong> If you enable the Accessibility Service, LifeLink detects only which app is in the foreground to enforce your chosen screen time limits and app blocking rules. We explicitly set <code>canRetrieveWindowContent=false</code> — we never read screen content, text, passwords, or messages of any app.</li>
-            </ul>
-        </section>
-
-        <!-- ═══ 2. What We Do NOT Collect ════════════════════════════════ -->
-        <section>
-            <h2>2. What We Do NOT Collect</h2>
-            <div class="info-box">
-                <p>✗ We do <strong>not</strong> collect your location data.</p>
-                <p>✗ We do <strong>not</strong> access your contacts, call logs, or SMS.</p>
-                <p>✗ We do <strong>not</strong> read your emails or messages.</p>
-                <p>✗ We do <strong>not</strong> track you across other apps or websites.</p>
-                <p>✗ We do <strong>not</strong> build advertising profiles from your personal data.</p>
-                <p>✗ We do <strong>not</strong> sell, rent, or trade your personal data to any third party.</p>
-                <p>✗ We do <strong>not</strong> upload your screen time or app usage data to any server.</p>
-                <p>✗ We do <strong>not</strong> read screen content, text fields, or passwords via the Accessibility Service.</p>
-            </div>
-        </section>
-
-        <!-- ═══ 3. How We Use Your Information ═══════════════════════════ -->
-        <section>
-            <h2>3. How We Use Your Information</h2>
-            <p>We use the information we collect for the following purposes:</p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Purpose</th>
-                        <th>Legal Basis (GDPR)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Provide, operate, and maintain the App</td>
-                        <td>Contract performance</td>
-                    </tr>
-                    <tr>
-                        <td>Sync your data across devices when you sign in</td>
-                        <td>Consent (opt-in)</td>
-                    </tr>
-                    <tr>
-                        <td>Deliver AI-powered coaching through Aria</td>
-                        <td>Consent (opt-in per mode)</td>
-                    </tr>
-                    <tr>
-                        <td>Display advertisements via Google AdMob</td>
-                        <td>Legitimate interest</td>
-                    </tr>
-                    <tr>
-                        <td>Send service-related notifications (not marketing)</td>
-                        <td>Legitimate interest</td>
-                    </tr>
-                    <tr>
-                        <td>Diagnose crashes and improve performance</td>
-                        <td>Legitimate interest</td>
-                    </tr>
-                    <tr>
-                        <td>Improve the App based on aggregated analytics</td>
-                        <td>Legitimate interest</td>
-                    </tr>
-                    <tr>
-                        <td>Comply with legal obligations</td>
-                        <td>Legal obligation</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <!-- ═══ 4. Permissions ═══════════════════════════════════════════ -->
-        <section>
-            <h2>4. Permissions and Their Purpose</h2>
-            <p>LifeLink requests certain Android permissions. Each permission is opt-in, and revoking any permission only disables the corresponding feature — it does not affect the rest of the App.</p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Permission</th>
-                        <th>Purpose</th>
-                        <th>Data Leaves Device?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Internet</strong></td>
-                        <td>Firebase sync, AI cloud mode, ads, crash reporting</td>
-                        <td>Yes (only when features active)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Usage Access</strong> (PACKAGE_USAGE_STATS)</td>
-                        <td>Show your screen time data to you inside the App</td>
-                        <td>No — never leaves device</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Accessibility Service</strong></td>
-                        <td>Detect foreground app to enforce your app-blocking and screen time limits</td>
-                        <td>No — never leaves device</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Display Over Other Apps</strong> (SYSTEM_ALERT_WINDOW)</td>
-                        <td>Show focus session overlay during voluntary focus sessions</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Foreground Service</strong></td>
-                        <td>Keep focus session timer running reliably in the background</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Notifications</strong> (POST_NOTIFICATIONS)</td>
-                        <td>Deliver task reminders, focus session alerts, and service notifications</td>
-                        <td>No</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>Accessibility Service — Detailed Disclosure</h3>
-            <p>LifeLink uses an Accessibility Service solely for the "Protocol" (Digital Discipline) feature. This service:</p>
-            <ul>
-                <li><strong>Does:</strong> Detect when a blocked or limited app comes to the foreground so that LifeLink can show a redirect/blocking overlay that you configured.</li>
-                <li><strong>Does NOT:</strong> Read, collect, store, or transmit any screen content, text, passwords, form data, messages, or keystrokes. Our accessibility configuration explicitly sets <code>canRetrieveWindowContent=false</code>.</li>
-                <li><strong>Does NOT:</strong> Operate when you have not granted the permission or when the Protocol feature is inactive.</li>
-            </ul>
-            <p>This Accessibility Service is not used for analytics, advertising, data collection, or any purpose other than enforcing your voluntarily configured app-blocking and screen time rules.</p>
-        </section>
-
-        <!-- ═══ 5. AI Features ═══════════════════════════════════════════ -->
-        <section>
-            <h2>5. AI Features and Data Processing</h2>
-            <p>LifeLink includes an AI assistant called "Aria". You have complete control over how Aria processes your data:</p>
-
-            <h3>5.1 Local AI Mode (Default)</h3>
-            <p>All AI processing occurs on your device using Google MediaPipe. <strong>No data is sent to any external server.</strong> This is the default mode.</p>
-
-            <h3>5.2 Cloud AI Mode (Opt-In)</h3>
-            <p>If you explicitly enable Cloud AI mode, the following data may be sent to the Groq Cloud API (which runs the Llama 3.3 70B model) for processing:</p>
-            <ul>
-                <li>Your chat messages</li>
-                <li>Conversation history for context</li>
-                <li>Player profile stats (level, rank, tasks completed, etc.) — only if you allow via AI Privacy Controls</li>
-                <li>Recent journal entries — only if you allow via AI Privacy Controls</li>
-                <li>Notes — only if you allow via AI Privacy Controls</li>
-                <li>Focus session/Protocol settings — only if you allow via AI Privacy Controls</li>
-            </ul>
-            <p>This data is processed transiently by the API and is not persistently stored by the third-party AI provider beyond the duration of the API call. We encourage you to review <a href="https://groq.com/privacy-policy/" target="_blank" rel="noopener">Groq's Privacy Policy</a>.</p>
-
-            <h3>5.3 AI Privacy Controls</h3>
-            <p>You can individually enable or disable Aria's access to each category of your data (player stats, journal, notes, protocol settings) via <strong>Settings → AI Privacy Control</strong>. You can switch between Local and Cloud AI at any time.</p>
-        </section>
-
-        <!-- ═══ 6. Data Storage and Security ═════════════════════════════ -->
-        <section>
-            <h2>6. Data Storage and Security</h2>
-
-            <h3>6.1 Local Storage</h3>
-            <p>Your data is stored locally on your device using Android DataStore (preferences) and Room Database (SQLite). This storage is sandboxed by the Android operating system and is inaccessible to other apps.</p>
-
-            <h3>6.2 Cloud Storage (Opt-In)</h3>
-            <p>If you sign in and enable sync, your data is stored in:</p>
-            <ul>
-                <li><strong>Google Firebase Firestore:</strong> User account information, username, and player stats are stored in your private Firestore document, protected by Firebase Security Rules that ensure only authenticated users can access their own data.</li>
-                <li><strong>Google Drive App Data Folder:</strong> Full app backups (tasks, habits, journal entries, projects, settings, and optional wallpaper) are stored in your Google Drive's hidden application data folder. Only LifeLink can access this folder — not even you can browse it via the Drive web interface, and we cannot access it either. This data is encrypted in transit and at rest by Google.</li>
-            </ul>
-
-            <h3>6.3 Security Measures</h3>
-            <ul>
-                <li>Passwords are never stored in plain text. Firebase Authentication handles all credential management using industry-standard encryption and hashing.</li>
-                <li>All network communications use HTTPS/TLS encryption.</li>
-                <li>Firebase Security Rules enforce per-user data isolation.</li>
-                <li>Firebase App Check with Play Integrity is enabled to protect against abuse and unauthorized access.</li>
-                <li>We implement reasonable technical and organizational security measures to protect your data. However, no method of electronic storage or internet transmission is 100% secure, and we cannot guarantee absolute security.</li>
-            </ul>
-        </section>
-
-        <!-- ═══ 7. Advertising ═══════════════════════════════════════════ -->
-        <section>
-            <h2>7. Advertising</h2>
-            <p>LifeLink displays banner advertisements using Google AdMob. AdMob may collect:</p>
-            <ul>
-                <li>Device advertising identifier (Google Advertising ID)</li>
-                <li>Device information (model, OS version)</li>
-                <li>IP address (for geographic ad targeting at a broad level)</li>
-                <li>Ad interaction data (impressions, clicks)</li>
-            </ul>
-            <p>We do not share your personal data (journal entries, tasks, habits, usage stats, etc.) with advertisers or ad networks. For more information, see <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
-            <p>You can opt out of personalized ads via your device's Google Settings under <strong>Ads</strong>.</p>
-        </section>
-
-        <!-- ═══ 8. Data Sharing and Disclosure ═══════════════════════════ -->
-        <section>
-            <h2>8. Data Sharing and Disclosure</h2>
-            <p>We do not sell, trade, or rent your personal information. We share data only in the following limited circumstances:</p>
-
-            <h3>8.1 Service Providers</h3>
-            <p>We use the following third-party services that may process data on our behalf:</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Service</th>
-                        <th>Provider</th>
-                        <th>Purpose</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Firebase Authentication</td>
-                        <td>Google LLC</td>
-                        <td>User account management and secure sign-in</td>
-                    </tr>
-                    <tr>
-                        <td>Cloud Firestore</td>
-                        <td>Google LLC</td>
-                        <td>Cloud data storage and sync (opt-in)</td>
-                    </tr>
-                    <tr>
-                        <td>Firebase Analytics</td>
-                        <td>Google LLC</td>
-                        <td>Anonymized usage analytics</td>
-                    </tr>
-                    <tr>
-                        <td>Google AdMob</td>
-                        <td>Google LLC</td>
-                        <td>In-app advertising</td>
-                    </tr>
-                    <tr>
-                        <td>Google Drive API</td>
-                        <td>Google LLC</td>
-                        <td>App data backup and restore (opt-in)</td>
-                    </tr>
-                    <tr>
-                        <td>Firebase App Check</td>
-                        <td>Google LLC</td>
-                        <td>Abuse protection via Play Integrity</td>
-                    </tr>
-                    <tr>
-                        <td>Groq Cloud API</td>
-                        <td>Groq, Inc.</td>
-                        <td>AI chat processing (opt-in, Cloud AI mode only)</td>
-                    </tr>
-                    <tr>
-                        <td>Google MediaPipe</td>
-                        <td>Google LLC</td>
-                        <td>On-device AI inference (default, no data sent)</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>8.2 Community Features</h3>
-            <p>If you participate in the Community leaderboard, the following information is visible to other LifeLink users:</p>
-            <ul>
-                <li>Username</li>
-                <li>Profile picture (if set)</li>
-                <li>Level and XP</li>
-            </ul>
-            <p>No other personal data (journal entries, tasks, habits, email, focus sessions, screen time) is shared with other users.</p>
-
-            <h3>8.3 Legal Requirements</h3>
-            <p>We may disclose your information if required to do so by law, regulation, court order, or governmental authority, or if we believe in good faith that such disclosure is necessary to protect the rights, property, or safety of our users or the public.</p>
-        </section>
-
-        <!-- ═══ 9. Data Retention ════════════════════════════════════════ -->
-        <section>
-            <h2>9. Data Retention</h2>
-            <ul>
-                <li><strong>Local Data:</strong> Retained on your device until you delete it within the App or uninstall the App.</li>
-                <li><strong>Cloud Data (Firebase):</strong> Retained while your account is active. Upon in-app account deletion, cloud data is permanently deleted after account verification.</li>
-                <li><strong>Google Drive Backups:</strong> Retained in your personal Google Drive while your account is active. In-app account deletion deletes the app backup from Google Drive before deleting your account. If you request deletion outside the app, you may also remove the backup or revoke LifeLink's access from your Google Account settings.</li>
-                <li><strong>Analytics Data:</strong> Anonymized analytics data is retained per Google's data retention policies (default: 14 months, not linked to your identity).</li>
-                <li><strong>AI Conversations:</strong> Stored locally on your device. Cloud AI API calls are transient — data is not retained by Groq beyond the API request.</li>
-            </ul>
-        </section>
-
-        <!-- ═══ 10. Your Rights ══════════════════════════════════════════ -->
-        <section>
-            <h2>10. Your Rights</h2>
-            <p>Depending on your jurisdiction, you may have the following rights regarding your personal data:</p>
-
-            <h3>For All Users</h3>
-            <ul>
-                <li><strong>Access:</strong> Request a copy of the personal data we hold about you.</li>
-                <li><strong>Correction:</strong> Request correction of inaccurate or incomplete data.</li>
-                <li><strong>Deletion:</strong> Request deletion of your account and associated data. You can do this directly from <strong>Settings</strong> within the App.</li>
-                <li><strong>Data Portability:</strong> Receive your data in a structured, machine-readable format via the Google Drive backup feature.</li>
-                <li><strong>Withdraw Consent:</strong> Revoke consent for cloud sync, cloud AI, or any optional feature at any time via Settings.</li>
-            </ul>
-
-            <h3>For EU/EEA Users (GDPR)</h3>
-            <p>Under the General Data Protection Regulation, you additionally have the right to:</p>
-            <ul>
-                <li>Object to processing based on legitimate interests.</li>
-                <li>Restrict processing of your personal data.</li>
-                <li>Lodge a complaint with your local data protection authority.</li>
-            </ul>
-
-            <h3>For California Users (CCPA/CPRA)</h3>
-            <p>Under the California Consumer Privacy Act and California Privacy Rights Act, you have the right to:</p>
-            <ul>
-                <li>Know what personal information is collected, used, and shared.</li>
-                <li>Request deletion of your personal information.</li>
-                <li>Opt-out of the sale of personal information. <strong>We do not sell your personal information.</strong></li>
-                <li>Non-discrimination for exercising your privacy rights.</li>
-            </ul>
-
-            <h3>For Users in Other Jurisdictions</h3>
-            <p>If you are located in any other jurisdiction with applicable data protection laws (e.g., LGPD in Brazil, POPIA in South Africa, PDPA in Singapore/Thailand, or India's DPDP Act), we will honor your rights as required by applicable law. Contact us using the details in Section 15 to exercise your rights.</p>
-
-            <p>To exercise any of these rights, contact us at the email provided in Section 15. We will respond within 30 days (or such shorter period as required by applicable law).</p>
-        </section>
-
-        <!-- ═══ 11. International Data Transfers ═════════════════════════ -->
-        <section>
-            <h2>11. International Data Transfers</h2>
-            <p>LifeLink uses cloud services provided by Google LLC (United States) and Groq, Inc. (United States). If you are located outside the United States, your data may be transferred to and processed in the United States or other countries where our service providers maintain facilities.</p>
-            <p>These transfers are protected by the service providers' compliance with applicable data protection frameworks, including Standard Contractual Clauses (SCCs) and the EU-U.S. Data Privacy Framework where applicable.</p>
-        </section>
-
-        <!-- ═══ 12. Children's Privacy ═══════════════════════════════════ -->
-        <section>
-            <h2>12. Children's Privacy</h2>
-            <p>LifeLink is not directed to children under the age of 13 (or the applicable minimum age in your jurisdiction). We do not knowingly collect personal information from children under 13.</p>
-            <p>If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately at the email provided in Section 15. We will promptly investigate and delete such information.</p>
-            <p>If we become aware that we have collected personal information from a child under 13 without parental consent, we will take steps to delete that information as quickly as possible.</p>
-        </section>
-
-        <!-- ═══ 13. Data Security Incident Response ══════════════════════ -->
-        <section>
-            <h2>13. Data Security Incident Response</h2>
-            <p>In the unlikely event of a data breach that affects your personal information, we will:</p>
-            <ul>
-                <li>Notify affected users without undue delay and no later than 72 hours after becoming aware of the breach (as required by applicable law).</li>
-                <li>Notify relevant data protection authorities as required by law.</li>
-                <li>Take immediate steps to contain and remediate the breach.</li>
-                <li>Provide clear information about what data was affected and recommended protective actions.</li>
-            </ul>
-        </section>
-
-        <!-- ═══ 14. Changes to This Policy ═══════════════════════════════ -->
-        <section>
-            <h2>14. Changes to This Privacy Policy</h2>
-            <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or other factors. When we make material changes:</p>
-            <ul>
-                <li>We will update the "Last Updated" date at the top of this page.</li>
-                <li>We will notify you through an in-app notification before the changes take effect.</li>
-                <li>For significant changes that affect how we process your data, we will seek your renewed consent where required by law.</li>
-            </ul>
-            <p>We encourage you to review this Privacy Policy periodically. Your continued use of the App after any changes constitutes your acceptance of the updated policy.</p>
-        </section>
-
-        <!-- ═══ 15. Contact Us ═══════════════════════════════════════════ -->
-        <section>
-            <h2>15. Contact Us</h2>
-            <p>If you have any questions, concerns, requests, or complaints regarding this Privacy Policy or our data practices, please contact us at:</p>
-            <div class="info-box">
-                <p><strong>Developer:</strong> Roshan Sharma</p>
-                <p><strong>Email:</strong> <a href="mailto:roshan887407@gmail.com">roshan887407@gmail.com</a></p>
-                <p><strong>App:</strong> LifeLink — Digital Discipline &amp; Growth</p>
-                <p><strong>Platform:</strong> Google Play Store (Android)</p>
-            </div>
-            <p>We will acknowledge your request within 48 hours and respond substantively within 30 days.</p>
-        </section>
-
-        <!-- ═══ 16. Google Play Requirements Disclosure ═══════════════════ -->
-        <section>
-            <h2>16. Google Play Data Safety Disclosure Summary</h2>
-            <p>In accordance with Google Play Store requirements, the following is a summary of our data handling practices:</p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Data Type</th>
-                        <th>Collected?</th>
-                        <th>Shared?</th>
-                        <th>Purpose</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Email address</td>
-                        <td>Yes (if signed in)</td>
-                        <td>No</td>
-                        <td>Account management</td>
-                    </tr>
-                    <tr>
-                        <td>Username</td>
-                        <td>Yes (if signed in)</td>
-                        <td>Community leaderboard</td>
-                        <td>Account identity &amp; community</td>
-                    </tr>
-                    <tr>
-                        <td>Profile picture</td>
-                        <td>Yes (optional)</td>
-                        <td>Community leaderboard</td>
-                        <td>User profile</td>
-                    </tr>
-                    <tr>
-                        <td>App activity (tasks, habits, journal)</td>
-                        <td>Yes (locally)</td>
-                        <td>No</td>
-                        <td>App functionality</td>
-                    </tr>
-                    <tr>
-                        <td>App usage data (screen time)</td>
-                        <td>On-device only</td>
-                        <td>No</td>
-                        <td>Digital discipline features</td>
-                    </tr>
-                    <tr>
-                        <td>Crash logs &amp; diagnostics</td>
-                        <td>Yes (anonymized)</td>
-                        <td>Firebase/Google</td>
-                        <td>App stability</td>
-                    </tr>
-                    <tr>
-                        <td>Device identifiers (Ad ID)</td>
-                        <td>By AdMob SDK</td>
-                        <td>Google AdMob</td>
-                        <td>Advertising</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="info-box">
-                <p><strong>Data encryption:</strong> All data is encrypted in transit (HTTPS/TLS). Cloud data is encrypted at rest by Google.</p>
-                <p><strong>Data deletion:</strong> You can request account and data deletion from within the App settings or by contacting us at <a href="mailto:roshan887407@gmail.com">roshan887407@gmail.com</a>.</p>
-            </div>
-        </section>
-
-        <footer>
-            <p>© 2025–2026 Roshan Sharma. All rights reserved.</p>
-            <p>LifeLink — Digital Discipline &amp; Growth</p>
-            <p style="margin-top: 12px;">This privacy policy was created to comply with Google Play Store requirements, GDPR (EU), CCPA/CPRA (California), and other applicable privacy regulations.</p>
-        </footer>
+        </div>
     </div>
+
+    <!-- ═══ PROBLEM SECTION ═════════════════════════════════════════════ -->
+    <section class="problem-section">
+        <div class="section-container">
+            <div class="problem-content">
+                <div class="section-badge reveal">📵 The Problem</div>
+                <h2 class="section-title reveal reveal-delay-1">The average person wastes</h2>
+                <div class="problem-stat reveal reveal-delay-2">
+                    <span class="hours">4–7 hours</span> / day
+                </div>
+                <p class="problem-description reveal reveal-delay-3">
+                    on their phone. <span class="problem-highlight">That's not an accident.</span> 
+                    Tech companies employ thousands of engineers, psychologists, and behavioral scientists 
+                    with one goal: <span class="problem-highlight">maximize your screen time.</span>
+                    <br><br>
+                    Every infinite scroll, every notification, every autoplay — 
+                    is a <span class="problem-highlight">carefully engineered hook.</span>
+                    <br><br>
+                    Arise is the counter-force. Built to give you your life back.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ═══ FEATURES SECTION ════════════════════════════════════════════ -->
+    <section class="features-section" id="features">
+        <div class="section-container">
+            <div class="features-header">
+                <div class="section-badge reveal">✨ Features</div>
+                <h2 class="section-title reveal reveal-delay-1">
+                    Everything you need to <span class="gradient-text">level up</span>
+                </h2>
+                <p class="section-subtitle reveal reveal-delay-2">
+                    Not just another habit tracker. Arise is a complete discipline system — 
+                    built by someone who needed it, for everyone who needs it.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon" style="background: rgba(124,92,252,0.1);">🔥</div>
+                    <h3 class="feature-title">Habit Tracking</h3>
+                    <p class="feature-desc">Build streaks, earn XP, and never break the chain. Visual progress that keeps you accountable every single day.</p>
+                </div>
+
+                <div class="feature-card reveal reveal-delay-1">
+                    <div class="feature-icon" style="background: rgba(34,211,238,0.1);">📵</div>
+                    <h3 class="feature-title">Protocol</h3>
+                    <p class="feature-desc">Take back your screen time. Set limits, block distractions, and enter focus sessions that actually work.</p>
+                </div>
+
+                <div class="feature-card reveal reveal-delay-2">
+                    <div class="feature-icon" style="background: rgba(244,114,182,0.1);">🤖</div>
+                    <h3 class="feature-title">Aria AI Coach</h3>
+                    <p class="feature-desc">Your personal AI coach that understands your goals, habits, and progress — and helps you stay on track with zero judgment.</p>
+                </div>
+
+                <div class="feature-card reveal reveal-delay-1">
+                    <div class="feature-icon" style="background: rgba(74,222,128,0.1);">📔</div>
+                    <h3 class="feature-title">Journal</h3>
+                    <p class="feature-desc">Private daily journaling with reflection prompts. Process your thoughts, track your growth, and build self-awareness.</p>
+                </div>
+
+                <div class="feature-card reveal reveal-delay-2">
+                    <div class="feature-icon" style="background: rgba(251,191,36,0.1);">⚡</div>
+                    <h3 class="feature-title">Tasks & Projects</h3>
+                    <p class="feature-desc">Organize your life with powerful task management. Create projects, set deadlines, and crush your goals systematically.</p>
+                </div>
+
+                <div class="feature-card reveal reveal-delay-3">
+                    <div class="feature-icon" style="background: rgba(248,113,113,0.1);">🏆</div>
+                    <h3 class="feature-title">Community</h3>
+                    <p class="feature-desc">Compete on the leaderboard, earn ranks, and grow alongside warriors who share your mission. Rise together.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ═══ PROTOCOL SHOWCASE ════════════════════════════════════════════ -->
+    <section class="showcase-section" id="protocol">
+        <div class="section-container">
+            <div class="showcase-grid">
+                <div class="showcase-text">
+                    <div class="section-badge reveal">📵 Protocol</div>
+                    <h2 class="section-title reveal reveal-delay-1">
+                        Your weapon against <span class="gradient-text">phone addiction</span>
+                    </h2>
+                    <p class="section-subtitle reveal reveal-delay-2">
+                        Protocol isn't just a screen time tracker. It's a full digital discipline system 
+                        that puts you back in control of your attention.
+                    </p>
+                    <ul class="showcase-features-list reveal reveal-delay-3">
+                        <li><span class="check">✓</span> Real-time screen time tracking — all data stays on your device</li>
+                        <li><span class="check">✓</span> App blocking with customizable schedules</li>
+                        <li><span class="check">✓</span> Focus sessions with locked timers</li>
+                        <li><span class="check">✓</span> Strict Mode — voluntary commitment that holds you accountable</li>
+                        <li><span class="check">✓</span> Zero data uploaded. Zero tracking. Just discipline.</li>
+                    </ul>
+                </div>
+                <div class="showcase-visual reveal reveal-delay-2">
+                    <div class="glow" style="background: radial-gradient(circle, rgba(34,211,238,0.3), transparent 60%);"></div>
+                    <img src="assets/arise_protocol.png" alt="Protocol — Digital Discipline" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ═══ ARIA AI SHOWCASE ═════════════════════════════════════════════ -->
+    <section class="showcase-section" id="aria">
+        <div class="section-container">
+            <div class="showcase-grid reversed">
+                <div class="showcase-text">
+                    <div class="section-badge reveal">🤖 Aria AI</div>
+                    <h2 class="section-title reveal reveal-delay-1">
+                        Meet <span class="gradient-text">Aria</span> — your AI coach
+                    </h2>
+                    <p class="section-subtitle reveal reveal-delay-2">
+                        Aria understands your habits, your progress, and your goals. 
+                        Get personalized coaching that adapts to your journey — with privacy at its core.
+                    </p>
+                    <ul class="showcase-features-list reveal reveal-delay-3">
+                        <li><span class="check">✓</span> Runs on-device by default — no data leaves your phone</li>
+                        <li><span class="check">✓</span> Cloud AI mode (opt-in) for deeper insights</li>
+                        <li><span class="check">✓</span> Granular privacy controls — you decide what Aria can see</li>
+                        <li><span class="check">✓</span> Motivational coaching, not generic chatbot responses</li>
+                        <li><span class="check">✓</span> Zero data stored externally. Zero training on your data.</li>
+                    </ul>
+                </div>
+                <div class="showcase-visual reveal reveal-delay-2">
+                    <div class="glow" style="background: radial-gradient(circle, rgba(124,92,252,0.3), transparent 60%);"></div>
+                    <img src="assets/arise_ai.png" alt="Aria AI Coach" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ═══ COMMUNITY ═══════════════════════════════════════════════════ -->
+    <section class="showcase-section" id="community">
+        <div class="section-container">
+            <div class="problem-content" style="margin-bottom: 60px;">
+                <div class="section-badge reveal">🏆 Community</div>
+                <h2 class="section-title reveal reveal-delay-1">
+                    Rise with <span class="gradient-text">warriors</span>, not scrollers
+                </h2>
+                <p class="section-subtitle reveal reveal-delay-2" style="margin: 0 auto;">
+                    Join a community of builders who chose discipline over dopamine. 
+                    Compete on the leaderboard, earn ranks, and grow together.
+                </p>
+            </div>
+
+            <div class="features-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="feature-card reveal">
+                    <div class="feature-icon" style="background: rgba(251,191,36,0.1);">🥇</div>
+                    <h3 class="feature-title">Leaderboard</h3>
+                    <p class="feature-desc">Compete with others based on real discipline — habits completed, tasks done, focus sessions locked in.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-1">
+                    <div class="feature-icon" style="background: rgba(124,92,252,0.1);">⚔️</div>
+                    <h3 class="feature-title">Ranks & Levels</h3>
+                    <p class="feature-desc">From Rookie to Legend — earn XP, unlock achievements, and prove your growth through consistent action.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-2">
+                    <div class="feature-icon" style="background: rgba(74,222,128,0.1);">🛡️</div>
+                    <h3 class="feature-title">Privacy-First Social</h3>
+                    <p class="feature-desc">Only your username, profile pic, and XP are visible. Your journal, tasks, and screen time are always private.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ QUOTE ═══════════════════════════════════════════════════════ -->
+    <section class="quote-section">
+        <div class="section-container">
+            <div class="reveal">
+                <p class="quote-text">
+                    "Discipline is choosing between what you want <em>now</em> 
+                    and what you want <em>most.</em>"
+                </p>
+                <p class="quote-author">— Abraham Lincoln</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ PRIVACY SECTION ═════════════════════════════════════════════ -->
+    <section class="showcase-section">
+        <div class="section-container">
+            <div class="problem-content" style="margin-bottom: 40px;">
+                <div class="section-badge reveal">🔒 Privacy</div>
+                <h2 class="section-title reveal reveal-delay-1">
+                    Your data is <span class="gradient-text">yours. Period.</span>
+                </h2>
+                <p class="section-subtitle reveal reveal-delay-2" style="margin: 0 auto;">
+                    We built Arise around a fundamental belief: privacy is a right, not a feature.
+                    Here's what that means in practice.
+                </p>
+            </div>
+
+            <div class="features-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 48px;">
+                <div class="feature-card reveal">
+                    <div class="feature-icon" style="background: rgba(74,222,128,0.1);">📱</div>
+                    <h3 class="feature-title">Works 100% Offline</h3>
+                    <p class="feature-desc">All your data stays on your device by default. Cloud sync is opt-in, not opt-out. Your choice. Always.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-1">
+                    <div class="feature-icon" style="background: rgba(248,113,113,0.1);">🚫</div>
+                    <h3 class="feature-title">Zero Data Sold</h3>
+                    <p class="feature-desc">We don't sell, rent, or trade your data. We don't build ad profiles. We don't share with marketers. Ever.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-2">
+                    <div class="feature-icon" style="background: rgba(34,211,238,0.1);">🗑️</div>
+                    <h3 class="feature-title">Delete Anytime</h3>
+                    <p class="feature-desc">Full account deletion on demand. One tap. All data gone — cloud, backup, local. No retention games.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ═══ CTA SECTION ═════════════════════════════════════════════════ -->
+    <section class="cta-section" id="download">
+        <div class="section-container">
+            <div class="cta-card reveal">
+                <div class="section-badge" style="margin-bottom: 24px;">🚀 Get Started</div>
+                <h2 class="section-title" style="margin-bottom: 16px;">
+                    Ready to <span class="gradient-text">Arise?</span>
+                </h2>
+                <p class="section-subtitle">
+                    Download free. Build habits. Reclaim your time.<br>
+                    Your journey starts with one decision.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#" class="play-store-badge">
+                        <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.457 1.422a1 1 0 0 1 0 1.74l-2.457 1.422-2.536-2.537 2.536-2.047zM5.864 2.658L16.8 9.309l-2.301 2.3-8.635-8.951z"/></svg>
+                        Coming Soon on Google Play
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ══════════════════════════════════════════════════════ -->
+    <footer>
+        <div class="section-container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#" class="nav-logo" style="margin-bottom: 8px;">
+                        <div class="nav-logo-icon">A</div>
+                        <span class="nav-logo-text">Arise</span>
+                    </a>
+                    <p class="footer-brand-desc">
+                        Your personal discipline operating system. Build habits, reclaim your screen time, 
+                        and grow with AI coaching — all with privacy at the core.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#protocol">Protocol</a></li>
+                        <li><a href="#aria">Aria AI</a></li>
+                        <li><a href="#community">Community</a></li>
+                        <li><a href="#download">Download</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="community-guidelines.html">Community Guidelines</a></li>
+                        <li><a href="delete-account.html">Delete My Data</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:roshan887407@gmail.com">roshan887407@gmail.com</a></li>
+                        <li><a href="https://github.com/roshan887407-ux" target="_blank" rel="noopener">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025–2026 Roshan Sharma. All rights reserved. Built with ❤️ in India.</p>
+                <div class="social-links">
+                    <a href="https://github.com/roshan887407-ux" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══ SCRIPTS ══════════════════════════════════════════════════════ -->
+    <script>
+        // ── Scroll Reveal ────────────────────────────────────────────────
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // ── Navbar Scroll Effect ─────────────────────────────────────────
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // ── Mobile Menu Toggle ───────────────────────────────────────────
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+            menuToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+        });
+
+        // Close mobile menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                menuToggle.textContent = '☰';
+            });
+        });
+
+        // ── Smooth Scroll for Safari ─────────────────────────────────────
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
